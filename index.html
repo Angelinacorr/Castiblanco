@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>MODELOS DE EVALUACION DE RED</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: #aec8e9;
+            padding: 20px;
+            background-size: 60px 60px;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: auto;
+            color: #000000;
+        }
+        
+        header {
+            background: linear-gradient(to right, #745abb, #3c65d4);
+            color: #fff7f7;
+            text-align: center;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.178);
+            position: relative;
+        }
+        
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .btn-inicio {
+            background-color: #3bb9b3;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .btn-inicio:hover {
+            background-color: #22948e;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        nav {
+            margin-bottom: 10px;
+            padding: 15px;
+        }
+        
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+        
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+        
+        nav ul li a {
+            color: #fdfcfd;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 1.1em;
+            letter-spacing: 0.5px;
+            position: relative;
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: #ffffff;
+            transition: width 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            color: #ffffff;
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        .promo-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            padding: 30px;
+            margin-top: 30px;
+        }
+        
+        .promo {
+            background-color: #e5e1fe;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            width: 320px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.4s ease;
+            margin: 10px;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .promo-main {
+            background-color: #5d5fe0;
+            color: #ffffff;
+            width: calc(100% - 60px);
+            padding: 20px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+        }
+        
+        .promo-main a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+        
+        .promo h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.6em;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .promo:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .promo:hover h2 {
+            transform: scale(1.05);
+        }
+        
+        .btn-primary {
+            display: inline-block;
+            margin-top: 20px;
+            background-color: #4e00cc;
+            color: #FFFFFF;
+            text-decoration: none;
+            padding: 12px 22px;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            font-family: 'Montserrat', sans-serif;
+            transition: all 0.3s ease;
+            border: none;
+            letter-spacing: 0.5px;
+            box-shadow: 0 5px 15px rgba(78, 0, 204, 0.3);
+        }
+        
+        .btn-primary:hover {
+            background-color: #29058b;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(117, 0, 153, 0.4);
+        }
+        
+        section {
+            margin: 30px auto;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+        }
+        
+        h2 {
+            font-size: 2.2em;
+            color: #1a0650;
+            margin-bottom: 25px;
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+        
+        p {
+            text-align: center;
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        strong {
+            color: #1c0755;
+            font-weight: 600;
+        }
+        
+        /* Estilo para el modal usando :target */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal:target {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 35px;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+            position: relative;
+            transform: translateY(-50px);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .modal:target .modal-content {
+            transform: translateY(0);
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 28px;
+            text-decoration: none;
+            color: #7f8c8d;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .close-modal:hover {
+            color: #e74c3c;
+            transform: rotate(90deg);
+        }
+        
+        .modal-info {
+            text-align: center;
+        }
+        
+        .modal-info h2 {
+            font-size: 1.8em;
+            color: #1c0755;
+            margin-bottom: 20px;
+        }
+        
+        .modal-info p {
+            margin: 12px 0;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+        
+        .modal-image {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 25px;
+            display: block;
+            border: 5px solid #3498db;
+            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .modal-image:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 25px rgba(52, 152, 219, 0.4);
+        }
+        
+    </style>
+</head>
+<body>
+    <header>
+        <h1>MODELOS DE EVALUACION DE RED</h1>
+        <a href="#personalInfoModal" class="btn-inicio">INICIO</a>
+        <nav>
+            <ul>
+                <li><a href="#Modelos">Modelos de evaluación</a></li>
+                <li><a href="#Rediseño">Rediseño</a></li>
+                <li><a href="#Aplicación">Aplicación de modelos</a></li>
+                <li><a href="#Referencias">Referencias</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="cover">
+            <h2>Bienvenido al Proyecto</h2>
+            <p>Bienvenido al sitio educativo de Modelos de Evaluación de Recursos Educativos Digitales. Aquí encontrarás algunas definiciones y ejemplos de modelos de evaluación de RED, se seleccionarán los más destacados, se hablará también sobre recursos educativos digitales, y el rediseño de uno de ellos.</p>
+        </section>
+    </main>
+
+
+    <section id="Modelos">
+        <div class="promo-container">
+            <div class="promo promo-main">
+                <a href="./modelos.html">
+                    <h2>Modelos de Evaluación</h2>
+                </a>
+            </div>
+            <div class="promo">
+                <h2>Seleccionando Modelos</h2>
+                <a href="./seleccionados.html" class="btn-primary">Ver más</a>
+            </div>
+            <div class="promo">
+                <h2>Recursos educativos digitales</h2>
+                <a href="./recursos.html" class="btn-primary">Ver más</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="Rediseño">
+        <div class="promo-container">
+            <div class="promo promo-main">
+                <a href="./Rediseño.html">
+                    <h2>Rediseñando un recurso</h2>
+                </a>
+                
+            </div>        
+        </div>
+    </section>
+
+    <section id="Aplicación">
+        <div class="promo-container">
+            <div class="promo promo-main">
+                <a href="./aplicacion.html">
+                    <h2>Aplicación de Modelos</h2>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="Referencias">
+        <div class="promo-container">
+            <div class="promo promo-main">
+                <a href="./referencias.html">
+                    <h2>Referencias</h2>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal para información personal usando :target -->
+    <div id="personalInfoModal" class="modal">
+        <div class="modal-content">
+            <a href="#" class="close-modal">&times;</a>
+            <img src="./uni.png" alt="Imagen de perfil" class="modal-image">
+            <div class="modal-info">
+                <h2>Presentación Personal</h2>
+                <p><strong>Nombre:</strong> Jorge Hernán Castiblanco Arroyave</p>
+                <p><strong>Profesor:</strong> Dora Nuvia Bayona Pinto</p>
+                <p><strong>Universidad:</strong> UNIVERSIDAD DE SANTANDER</p>
+                <p>Bienvenido al sitio educativo de Modelos de Evaluación de Recursos Educativos Digitales. Aquí encontrarás algunas definiciones y ejemplos de modelos de evaluación de RED, se seleccionarán los más destacados, se hablará también sobre recursos educativos digitales, y el rediseño de uno de ellos.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
